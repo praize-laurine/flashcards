@@ -1,0 +1,35 @@
+{%extends "registration/base.html"%}
+{% load bootstrap4 %}
+{% block content %}
+<div class="body" style="background-image: url(https://chawwards.herokuapp.com/static/images/download.jpeg); background-position: center; background-size: cover; background-repeat: no-repeat; overflow-x: hidden; height: 100vh;">
+    <div class="container">
+
+    {% if form.errors %}
+    <p> Password or Username is incorrect </p>
+    {% endif %}
+
+    <div class="card container" style="width: 20rem; margin-top:70px;">
+      <div class="card-body">
+        <h3 class="text-center" style="font-family: 'Yeon Sung', cursive;">Flashcards</h3>
+      </div>
+
+      <form action="/accounts/login/" method="POST" style="width: 100%; height: 50%;">
+
+        {% csrf_token %}
+        {% bootstrap_form form%}
+
+        <div class="form-group">
+            <input type="submit"  class="btn btn-primary btn-sm" value="Login">
+        </div>
+
+        <hr>
+        <p class="container">Don't have an account? <a href="/accounts/signUp"> Sign Up</a></p>
+
+        <input type="hidden" name="next" value="{{next}}">
+      
+    </form>
+
+    </div>
+    </div>
+</div>
+{% endblock %}
