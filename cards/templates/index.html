@@ -1,55 +1,80 @@
 {% extends 'base.html' %}
-{%block content%}
+{% block content%}
 {{ block.super}}
-{% load ratings %}
-<div>
-  <div class="container-fluid"
-    style="background-image: url('https://p1.pikrepo.com/preview/570/220/black-dslr-camera.jpg');  background-repeat: no-repeat; background-size: cover; height: 100vh;  background-position: center; text-align:center; overflow-x:hidden;">
-    <h1 style="  font-size:50px; margin-top:60px; color:aquamarine;     font-family: 'Gabriela', serif;">My Gallery
+
+<div class="container-fluid" style="background-image: url('https://images.unsplash.com/photo-1512805668868-1608a189cc2b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=889&q=80');  background-repeat: no-repeat; background-size: cover; height: 100vh;  background-position: center; text-align:center; overflow-x:hidden;">
+    <h1 style="  font-size:50px; margin-top:60px; color:aquamarine; font-family: 'Gabriela', serif;">My Flashcards Notes
     </h1>
-    <p style="color: beige; font-family: 'Gabriela', serif;"><b> By: </b>Laurine Praise</p>
-      <div>
-    <img src="https://ucarecdn.com/257afbc7-9e6d-4984-9939-f83076ad6d84/progressremovebgpreview.png" alt="">
-  </div>
-    <!-- <button type="button" class="btn btn-info btn-rounded">Info</button> -->
-    <!-- <a href="https://praisegallery.herokuapp.com/" class="btn btn-info btn-rounded" target="_blank">view site</a> -->
-  </div>
-  <br><br>
-  <div class="container-fluid">
-    <div class="row">
-      {% for document in json_documents %}
-      <div class="col-md-4">
-        <div class="card-group">
-          <div class="card card-personal mb-4">
-            <div class="view">
-              <img class="card-img-top" src="{{document.image.url}}" alt="Card image cap">
-              <a href="#!">
-                <div class="mask rgba-white-slight"></div>
-              </a>
-            </div>
-            <div class="card-body">
-              <h3 style="font-family: 'Cuprum', sans-serif;">{{document.title}}</h3>
-              <p class="card-text" style="    font-family: 'Gabriela', serif;"><b>document content:</b>{{document.content}}</p>
-              <hr>
-              <p class="card-text" style="    font-family: 'Gabriela', serif;"><b>document content:</b>{{document.content}}</p>
-
-              <span><a href="profile"> <img style="border-radius: 50%; width:30px; height:30px; "
-                    src="{{document.avatar }}" alt="image"></a>By
-                <b>{{document.author}}</b></span>
-              <p class="card-meta float-right">{{document.date_created}}</p>
-
-      
-      
-
-            </div>
-          </div>
-        </div>
-      </div>
-      {% endfor %}
+    <div>
+        <p style="color: black; font-size: 20px;">This app is used to summarize phrases, paragraphs, or even chapters of a book. <br> Doing so will prevent you from having to write on the pages and <br> having the sticky backing lets you stick the annotation wherever you please. </p>
     </div>
-    
-  </div>
+
 </div>
-{%endblock%}
+<br>
+<br>
 
 
+<div class="container-fluid">
+    <div class="row">
+        {% for images in image %}
+    <!-- {{images.image.url}} -->
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body" style=" box-shadow: 0 4px 8px 0 rgba(11, 10, 14, 0.87)">
+                  <a href="" data-toggle="modal" data-target="#staticBackdrop{{images.id}}"><img src="{{images.image.url}}" alt="img show" class="img-responsive styled" style="width: 100%; height: 100%;"></a>
+                </div>
+                <div class="panel-footer text-center" style="font-family: 'Gabriela', serif;"><b>By: {{images.name}}</b>
+                </div>
+            </div>
+    
+       
+
+            <div class="modal fade" id="staticBackdrop{{images.id}}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="modal-title" id="staticBackdropLabel text-center" style="font-family: 'Gabriela', serif;">By: {{images.name}}</h2>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <img src="{{images.image.url}}" alt="img show" class="img-responsive" style=" box-shadow: 0 4px 8px 0 rgba(11, 10, 14, 0.87); height: 100%; width: 100%;">
+                        </div>
+
+                        <div class="modal-footer">
+                            <div class="col-md-4" style="font-family: 'Gabriela', serif;">
+                                <p><b>Content:</b> {{images.content}}</p>
+                            </div>
+
+                            <div class="col-md-4" style="font-family: 'Gabriela', serif;">
+                                <p><b>Subject:</b> {{images.subject}}</p>
+                            </div>
+                            
+                            <p class="card-meta float-right">{{image.date_created}}</p>
+
+                        </div>
+
+                        <div class="modal-footer row">
+                            <!-- <div class="col-md-6">
+                              <input type="text" value="https://praisegallery.herokuapp.com/images/{{photos.id}}" id="myInput">
+                              <button type="button" class="btn btn-info" onclick="myFunction()">Copy Link</button>
+                            </div>
+
+                            <div class="col-md-4">
+                              <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            
+        </div>
+
+        {% endfor %}
+    
+    </div>
+</div>
+
+{% endblock %}
