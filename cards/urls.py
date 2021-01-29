@@ -12,5 +12,4 @@ urlpatterns=[
     path('search/', views.search_subject_results, name = 'search_subject_results'),
     path('post_subject/', views.post_subject,name ='post_subject'),
 
-
 ]
