@@ -12,7 +12,7 @@ class Images(models.Model):
     # image = CloudinaryField('images')
     name = models.CharField(max_length = 30)
     content = models.TextField()
-    location = models.ForeignKey('Location', on_delete=models.SET_NULL, default = '', null=True)
+    # location = models.ForeignKey('Location', on_delete=models.SET_NULL, default = '', null=True)
     subject = models.ForeignKey('Subject', on_delete=models.CASCADE, default='')
     date_created= models.DateField(auto_now_add=True )
 
@@ -67,3 +67,28 @@ class Location(models.Model):
 
     def __str__(self):
         return self.location_name    
+
+# class Profile(models.Model):
+#     profile_pic = models.ImageField(upload_to='profile/', blank ='true',default='default.png')
+#     bio = models.TextField()
+#     user = models.OneToOneField(User, on_delete = models.CASCADE)
+#     name = models.CharField(blank=True, max_length=120)
+#     # date_created = models.DateField(auto_now_add = True)      
+
+#     def __str__(self):
+#         return f'{self.user.username} Profile'
+
+#     def save_profile(self):
+#         self.save
+    
+#     def delete_user(self):
+#         self.delete()
+
+# @receiver(post_save, sender = User)
+# def create_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Profile.objects.create(user=instance)     
+
+# @receiver(post_save, sender=User)
+# def save_user_profile(sender, instance, **kwargs):
+#     instance.profile.save()   
