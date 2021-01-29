@@ -4,10 +4,10 @@
     <div class="row">
         {% if image %}
 
-        <h2 class="jumbotron" style="text-align: center;">Found {{image|length}} of searched term {{message}}</h2>
+        <h2 class="jumbotron" style="text-align: center;">Found {{image|length}} of searched term. {{message}}</h2>
 
         {% else %}
-        <h2 class="jumbotron" style="text-align: center;">Found 0 images for the search term {{message}}</h2>
+        <h2 class="jumbotron" style="text-align: center;">Found 0 subjects for the search term. {{message}}</h2>
 
         {% endif %}
     </div>
@@ -57,6 +57,9 @@
             </div>
         </div>
     </div>
-    
+    {% endfor %}
+    {% endif %}
 
 </div>
+
+{% endblock %}
