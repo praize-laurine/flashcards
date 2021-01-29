@@ -1,4 +1,4 @@
-#!/home/nadine/Documents/flashcards/virtual/bin/python
+#!/home/moringa/Documents/flashcards/virtual/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

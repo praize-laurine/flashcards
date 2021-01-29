@@ -19,31 +19,11 @@ def signUp(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username,password=password)
-            login(request, user)
+            # login(request, user)
             return redirect('index')
     else:
         form = SignUpForm()
     return render (request,'registration/signUp_form.html', {'form':form})  
-
-# @login_required(login_url='/accounts/login/')
-# def index(request):
-#     document = Document.all_documents()
-#     json_documents = []
-#     for document in document:
-#         picture = Profile.objects.filter(user=document.user.id).first()
-#         if picture:
-#             picture = picture.profile_pic.url
-#         else:
-#             picture = ''
-#         obj = dict(
-#             title = document.title,
-#             image = document.image,
-#             content = document.description,
-#             date_created = document.date_created,
-#             courses = document.user.username
-#         )   
-#         json_documents.append(obj) 
-#     return render(request, 'index.html', {"json_documents": json_documents}) 
 
 
 @login_required(login_url='/accounts/login/')
@@ -66,51 +46,51 @@ def search_subject_results(request):
         return render(request, 'search.html',{'message':message})
 
 
-# @login_required(login_url='/accounts/login/')
-# def userProfile(request):
+@login_required(login_url='/accounts/login/')
+def userProfile(request):
 
-#     if request.method == 'POST':
-#         user_form = UpdateUserForm(request.POST, instance = request.user)
-#         prof_form = UserProfileUpdateForm(request.POST,request.FILES, instance = request.user.profile)
+    if request.method == 'POST':
+        user_form = UpdateUserForm(request.POST, instance = request.user)
+        prof_form = UserProfileUpdateForm(request.POST,request.FILES, instance = request.user.profile)
 
-#         if user_form.is_valid and prof_form.is_valid():
-#             user_form.save()
-#             prof_form.save()
-#             message.success(request, f'Your account has been updated successfully!')
-#             return redirect('userProfile')
+        if user_form.is_valid and prof_form.is_valid():
+            user_form.save()
+            prof_form.save()
+            message.success(request, f'Your account has been updated successfully!')
+            return redirect('userProfile')
 
-#     else:
-#         user_form = UpdateUserForm(instance = request.user)
-#         prof_form = UserProfileUpdateForm(instance = request.user.profile)
-#     context = {
-#         'user_form': user_form,
-#         'prof_form': prof_form
-#     }     
-#     return render(request, 'userProfile.html', context) 
+    else:
+        user_form = UpdateUserForm(instance = request.user)
+        prof_form = UserProfileUpdateForm(instance = request.user.profile)
+    context = {
+        'user_form': user_form,
+        'prof_form': prof_form
+    }     
+    return render(request, 'userProfile.html', context) 
 
 
-# @login_required(login_url='/accounts/login/')
-# def update_profile(request):
-#     if request.method == 'POST':
-#         user_form = UpdateUserForm(request.POST, instance=request.user)
-#         prof_form = UserProfileUpdateForm(request.POST, request.FILES, instance=request.user)
+@login_required(login_url='/accounts/login/')
+def update_profile(request):
+    if request.method == 'POST':
+        user_form = UpdateUserForm(request.POST, instance=request.user)
+        prof_form = UserProfileUpdateForm(request.POST, request.FILES, instance=request.user)
 
-#         if user_form.is_valid():
-#             user_form.save()
-#             prof_form.save()
+        if user_form.is_valid():
+            user_form.save()
+            prof_form.save()
 
-#             return redirect('index')
+            return redirect('index')
 
-#     else:
-#         user_form = UpdateUserForm(instance = request.user)
-#         prof_form = UserProfileUpdateForm(instance = request.user)
+    else:
+        user_form = UpdateUserForm(instance = request.user)
+        prof_form = UserProfileUpdateForm(instance = request.user)
 
-#         context = {
-#             'user_form' : user_form,
-#             'prof_form' : prof_form
-#         }        
+        context = {
+            'user_form' : user_form,
+            'prof_form' : prof_form
+        }        
 
-#     return render(request, 'update_profile.html', context)    
+    return render(request, 'update_profile.html', context)    
 
 @login_required(login_url='/accounts/login/')
 def post_subject(request):
