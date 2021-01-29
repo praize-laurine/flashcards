@@ -56,8 +56,8 @@ def userProfile(request):
         if user_form.is_valid and prof_form.is_valid():
             user_form.save()
             prof_form.save()
-            message.success(request, f'Your account has been updated successfully!')
-            return redirect('userProfile')
+            
+            return redirect('index')
 
     else:
         user_form = UpdateUserForm(instance = request.user)

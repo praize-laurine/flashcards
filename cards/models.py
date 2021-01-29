@@ -73,7 +73,6 @@ class Profile(models.Model):
     bio = models.TextField()
     user = models.OneToOneField(User, on_delete = models.CASCADE)
     name = models.CharField(blank=True, max_length=120)
-    # date_created = models.DateField(auto_now_add = True)      
 
     def __str__(self):
         return f'{self.user.username} Profile'
