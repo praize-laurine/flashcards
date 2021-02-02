@@ -4,6 +4,8 @@ from tinymce.models import HTMLField
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 import datetime as dt
+from django.urls import reverse
+
 
 
 # Create your models here.
@@ -36,7 +38,8 @@ class Images(models.Model):
     def __str__(self):
         return self.name
      
-
+    def get_absolute_url(self):
+        return reverse('index')
 
 
 class Subject(models.Model):

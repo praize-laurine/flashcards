@@ -84,4 +84,4 @@ python3.6 manage.py runserver
 - CSS
 
 # Contact Details
-If you have any request or questions please email me at preyzelaurine@gmail.com
+If you have any request or questions please email me at preyzelaurine@gmail.com & nadineuwineza2017@gmail.com

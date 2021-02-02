@@ -6,6 +6,8 @@ from .forms import *
 from .models import Images
 from rest_framework.response import Response
 from django.contrib.auth.models import User
+from django.views.generic import UpdateView,DeleteView,ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 
@@ -25,12 +27,11 @@ def signUp(request):
         form = SignUpForm()
     return render (request,'registration/signUp_form.html', {'form':form})  
 
-
 @login_required(login_url='/accounts/login/')
 def index(request):
     image = Images.objects.all()
     print(image)
-    return render(request, 'index.html', {'image' : image})    
+    return render(request, 'index.html', {'image' : image})     
 
 
 def search_subject_results(request):
@@ -108,4 +109,30 @@ def post_subject(request):
     else:
         form = PostSubjectForm()
     return render(request, 'post_subject.html', {"form": form})
+
+class FlashcardUpdateView(UpdateView):
+    model = Images
+    template_name = 'post_subject.html'   
+    fields= ['image', 'name','content','subject']    
+
+class FlashcardDeleteView(DeleteView):
+    model = Images
+    template_name = 'delete.html'
+    success_url = ('/')
+
+# class FlashcardCreateView(LoginRequiredMixin,CreateView):
+#     model = Images
+#     fields = ['images', 'title', 'description', 'category']
+#     template_name = 'post_subject.html'
+
+    # def form_valid(self, form):
+    #     form.instance.user = self.request.user
+    #     return super().form_valid(form)
+
+# <app>/<model>_<viewtype>.html
+class FlashcardListView(ListView):
+    model = Images  
+    template_name = 'index.html'   
+    context_object_name = 'images'
+    ordering = ['-date_created']
 
